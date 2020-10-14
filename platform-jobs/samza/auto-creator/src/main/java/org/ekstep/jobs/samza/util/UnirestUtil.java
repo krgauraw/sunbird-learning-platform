@@ -122,8 +122,11 @@ public class UnirestUtil {
 			} catch (Exception e) {
 				LOGGER.error("UnirestUtil ::: getResponse ::: Error occurred while parsing api response. Error is: "+e.getMessage(), e);
 				if (BACKOFF_DELAY <= MAXIMUM_BACKOFF_DELAY) {
+					LOGGER.info("UnirestUtil :::: BACKOFF_DELAY ::: "+BACKOFF_DELAY);
 					long delay = BACKOFF_DELAY;
 					BACKOFF_DELAY = BACKOFF_DELAY * INCREMENT_BACKOFF_DELAY;
+					LOGGER.info("UnirestUtil :::: BACKOFF_DELAY after increment::: "+BACKOFF_DELAY);
+					LOGGER.info("UnirestUtil :::: delay ::: "+delay);
 					delay(delay);
 				} else throw new ServerException("ERR_API_CALL", "Unable to parse response data! | Error is: " + e.getMessage());
 			}
